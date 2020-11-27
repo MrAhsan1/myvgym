@@ -1,0 +1,136 @@
+CREATE TABLE users (
+	userid serial PRIMARY KEY,
+	username VARCHAR ( 255 ) UNIQUE NOT NULL,
+	password VARCHAR ( 50 ) NOT NULL,
+	firstName varchar (255) not null,
+	lastName varchar (255) not null,
+	isAdmin boolean Default false
+);
+
+create table userdetails (
+	id serial primary key,
+	dashboardID int not null, 
+	userid int not null,
+	foreign key (dashboardID) references dashboard(id),
+	foreign key (userid) references users(id)
+)
+
+create table dashboard (
+	id serial primary key,
+	monthly_report int,
+	client_report int
+)
+
+create table monthly_report(
+	id serial primary key,
+	name TEXT[],
+	amount int[]
+)
+
+select * from users as u inner join userdetails as ud on u.id = ud.userid inner join dashboard as d on d.id = ud.dashboardid left join monthly_report as mr on d.monthly_report = mr.id left join client_report as cr on d.client_report=cr.id left join (SELECT id , (SELECT SUM(s) FROM UNNEST(no_of_client) s) as total_client from client_report) tc on d.client_report=tc.id left join (SELECT id, (SELECT SUM(s) FROM UNNEST(amount) s) as total_revenue from monthly_report) rc on d.monthly_report = rc.id where u.username='test@gmail.com' and u.password='12345'
+
+create table client_report(
+	id serial primary key,
+	month_name TEXT[],
+	no_of_client int[]
+)
+
+create table client(
+	id serial primary key,
+	first_name varchar(255),
+	last_name varchar(255),
+	street_address text,
+	apartment_number varchar(255),
+	city varchar(255),
+	country varchar(255),
+	province varchar(255),
+	state varchar(255),
+	email varchar(255),
+	date_of_birth varchar(255),
+	age varchar(255),
+	height varchar(255),
+	body_weight varchar(255),
+	body_fat varchar(255),
+	resting_heart_rate varchar(255),
+	blood_pressure varchar(255),
+	fitness_goal varchar(255),
+	neck varchar(255),
+	chest varchar(255),
+	right_bicep varchar(255),
+	left_bicep varchar(255),
+	waist varchar(255),
+	hips varchar(255),
+	right_thigh varchar(255),
+	left_thigh varchar(255),
+	right_calf varchar(255),
+	left_calf varchar(255),
+	user_id int,
+)
+create table consultation (
+	id serial primary key,
+	first_name varchar(255),
+	last_name varchar(255),
+	street_address text,
+	apartment_number varchar(255),
+	city varchar(255),
+	country varchar(255),
+	province varchar(255),
+	state varchar(255),
+	email varchar(255),
+	date_of_birth varchar(255),
+	age varchar(255),
+	height varchar(255),
+	body_weight varchar(255),
+	body_fat varchar(255),
+	resting_heart_rate varchar(255),
+	blood_pressure varchar(255),
+	fitness_goal varchar(255),
+	neck varchar(255),
+	chest varchar(255),
+	right_bicep varchar(255),
+	left_bicep varchar(255),
+	waist varchar(255),
+	hips varchar(255),
+	right_thigh varchar(255),
+	left_thigh varchar(255),
+	right_calf varchar(255),
+	left_calf varchar(255),
+	new_fitness_goals text[],
+	status varchar(255),
+	req_date varchar(255),
+	acp_date varchar (255),
+	req_time varchar(255),
+	acp_time varchar(255),
+	reason varchar(255),
+	user_id int
+)
+
+create table userdetails (
+	user_details_id serial primary key,
+	user_id int,
+	foreign key (user_id) references client(id),
+	user_added_details jsonb,
+	user_details jsonb
+)
+
+SELECT id 
+FROM client 
+ORDER BY id DESC 
+LIMIT 1
+
+insert into consultation (first_name,last_name,street_address,apartment_number,city,country,province,state,email,date_of_birth,age,height,body_weight,body_fat,resting_heart_rate,blood_pressure,fitness_goal,neck,chest,right_bicep,left_bicep,wait,hips,right_thigh,left_thigh,right_calf,left_calf,new_fitness_goals,status,req_date,acp_date,req_time,acp_time,reason,user_id) values ('','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',3)
+
+INSERT INTO userdetails(user_id,user_details) VALUES ( 1, '[
+  {
+    "name": "abc",
+    "age": "22"
+  },
+  {
+    "name": "def",
+    "age": "23"
+  }
+]');
+
+UPDATE userdetails
+SET user_details = user_details || '{"age": "45", "play": "xyz"}'::jsonb
+WHERE user_id= 11;
