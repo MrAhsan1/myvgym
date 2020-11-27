@@ -33,6 +33,7 @@ router.post('/getConsultNotification',userdb.getConsultNotification);
 router.post('/getTrainerNotification',userdb.getTrainerNotification);
 router.post('/UpdateNotification',userdb.UpdateNotification);
 router.post('/changePassword',userdb.changePassword);
+router.get('/test',userdb.testing);
 
 
 module.exports = router;

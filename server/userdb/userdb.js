@@ -558,6 +558,12 @@ const UpdateNotification = (req,res,next)=>{
       })
   })
 }
+const testing = (req,res,next)=>{
+  console.log('testing');
+  res.json({
+    status: true,
+  })
+}
 module.exports = {
   loginUsers:loginUsers,
   counters:counters,
@@ -587,5 +593,6 @@ module.exports = {
   getConsultNotification:getConsultNotification,
   getTrainerNotification:getTrainerNotification,
   UpdateNotification:UpdateNotification,
-  changePassword:changePassword
+  changePassword:changePassword,
+  testing:testing
 }
