@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
-    "web": "node index.js"
+    "web": "node app.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
