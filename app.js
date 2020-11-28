@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+console.log('dsadas');
 app.use('/', index)
-
 app.use(function (req, res, next) {
   res.status(404).send('Sorry cant find that!')
 })
