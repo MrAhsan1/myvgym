@@ -22,6 +22,9 @@
     "pusher": "^2.1.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "10.x"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
